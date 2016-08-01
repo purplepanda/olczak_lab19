@@ -1,14 +1,19 @@
 var lyr = require('./lyrics.js');
-var http = require('http');
+// var http = require('http');
+var express = require('express');
+var app = express();
 
-http.createServer(function(request, response) {
+app.get('/', function(req, res) {
   var selection = Math.floor(Math.random() * lyr.length);
-  response.writeHead(200, {
-    "Content-type": "text/plain"
-  });
-  response.write(lyr[selection]);
-  response.end();
-}).listen(8888);
+  res.send(lyr[selection]);
+});
 
+app.listen(3000, function() {
+  console.log('Are we there yet?');
+});
 
-// console.log(lyr[selection]);
+// var server = app.listen(3000, function() {
+//   var host = server.address().address;
+//   var port = server.address().port;
+//
+//   console.log('3000');
